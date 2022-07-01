@@ -4,7 +4,7 @@ import os
 import glob
 import numpy as np
 
-tolerance = 0.38   #0.4 - 0.3 - 0.5 Çalışır strictness of detection
+tolerance = 0.38
 
 class SimpleFacerec:
     def __init__(self):
@@ -21,8 +21,6 @@ class SimpleFacerec:
         """
         images_path = glob.glob(os.path.join(images_path, "*.*"))
 
-        # print("{} kodlama görüntüleri bulundu.".format(len(images_path)))
-
         for img_path in images_path:
             img = cv2.imread(img_path)
             rgb_img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
@@ -36,8 +34,6 @@ class SimpleFacerec:
 
     def detect_known_faces(self, frame):
         small_frame = cv2.resize(frame, (0, 0), fx=self.frame_resizing, fy=self.frame_resizing)
-
-
         rgb_small_frame = cv2.cvtColor(small_frame, cv2.COLOR_BGR2RGB)
         face_locations = face_recognition.face_locations(rgb_small_frame)
         face_encodings = face_recognition.face_encodings(rgb_small_frame, face_locations)
@@ -46,7 +42,6 @@ class SimpleFacerec:
         for face_encoding in face_encodings:
             matches = face_recognition.compare_faces(self.known_face_encodings, face_encoding, tolerance)
             name = "Bilinmiyor"
-
 
             face_distances = face_recognition.face_distance(self.known_face_encodings, face_encoding)
             best_match_index = np.argmin(face_distances)
