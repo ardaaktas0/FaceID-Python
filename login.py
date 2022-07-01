@@ -1,6 +1,3 @@
-from multiprocessing.connection import wait
-from time import sleep
-from turtle import speed
 import cv2
 from simple_facerec import SimpleFacerec
 from datetime import datetime
@@ -10,19 +7,12 @@ from datetime import date
 def main():
     today = date.today()
     day = today.strftime("%b-%d-%Y")
-    day_str = "Çıkış " + day + ".txt"
-    print(day_str)
+    day_str = "Login " + day + ".txt"
 
     dosya = open(day_str, "a+")
     dosya.write("\n\n--------------------  Ad, Saat, Tarih  --------------------\n")
     dosya.close()
 
-    print(day_str)
-
-    #exitString = "Giriş " + day + ".txt"
-    #exitCSV = open(exitString, "a+")
-    #exitCSV.write("\n\n--------------------  Ad, Saat, Tarih  --------------------\n")
-    #exitCSV.close()
 
     enteredPerson = []
     leftPerson = []
@@ -42,8 +32,6 @@ def main():
 
 
 
-
-
             if (name not in enteredPerson):
                 now = datetime.now()
                 dtString = now.strftime('  %H:%M:%S')
@@ -53,30 +41,18 @@ def main():
                     enteredPerson.append(name)
 
 
-    # def writeToExit(name):
-    # if (name not in leftPerson):
-        #     with open(exitString, 'a+') as f:
-        #         now = datetime.now()
-        #         dtString = now.strftime('  %H:%M:%S')
-        #         adtString = now.strftime('  %D')
-        #         f.writelines(f'\n{name}{dtString}{adtString}')
-        #         leftPerson.append(name)
-
-
-
-
-    # Encode faces from a folder
+    # Yüzleri bir klasörden kodla
     sfr = SimpleFacerec()
     sfr.load_encoding_images("FaceID-Data/")
 
-    # Load Camera
+    # Kamerayı Yükle
     cap = cv2.VideoCapture(0)
 
 
     while True:
         ret, frame = cap.read()
 
-        # Detect Faces
+        # yüzü Algıla
         face_locations, face_names = sfr.detect_known_faces(frame)
         for face_loc, name in zip(face_locations, face_names):
             y1, x2, y2, x1 = face_loc[0], face_loc[1], face_loc[2], face_loc[3]

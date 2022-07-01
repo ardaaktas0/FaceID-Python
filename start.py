@@ -1,15 +1,9 @@
-from tkinter import *
-import giris
-import cikis
+from tkinter import Button, Frame, Tk
+import login
+import exit
 import fotosave
-from tkinter import messagebox
-from multiprocessing.connection import wait
-from time import sleep
-from turtle import speed
-import cv2
-from simple_facerec import SimpleFacerec
-from datetime import datetime
-from datetime import date
+
+
 
 pencere = Tk()
 
@@ -23,29 +17,27 @@ uygulama.grid(padx = 40, pady = 40)
 
 
 def clik_me():
-    giris.main()
+    login.main()
 
 def clik_me1():
-    cikis.main()
+    exit.main()
 
 def clik_me2():
     fotosave.main()
 
 
 
-
-
 #button ekleme bölümü
-button1 = Button(uygulama, text = " Giriş Yap " , command=clik_me)
-button1.grid(row=0, column=1)
+loginbtn = Button(uygulama, text = " Giriş Yap " , command=clik_me)
+loginbtn.grid(row=0, column=1)
 
-button2 = Button(uygulama, text = " Çıkış Yap " , command=clik_me1)
-button2.grid(row=0, column=2)
+exitbtn = Button(uygulama, text = " Çıkış Yap " , command=clik_me1)
+exitbtn.grid(row=0, column=2)
 
-button3 = Button(uygulama, text = " Kullanıcı Kaydet " , command=clik_me2)
-button3.grid(row=0, column=3)
+usersave = Button(uygulama, text = " Kullanıcı Kaydet " , command=clik_me2)
+usersave.grid(row=0, column=3)
 
-c = Button(pencere, text = "Uygulamayı Kapat", command = uygulama.quit)
-c.grid(row=0, column=4)
+close = Button(pencere, text = "Uygulamayı Kapat", command = uygulama.quit)
+close.grid(row=0, column=4)
 
 pencere.mainloop()
